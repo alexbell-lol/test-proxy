@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Search Proxy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Search Proxy</h1>
+    <input type="text" id="searchInput" placeholder="Enter your search query" />
+    <button onclick="search()">Search</button>
+
+    <script>
+        function search() {
+            var query = document.getElementById('searchInput').value;
+            if (query) {
+                // Encode the query to be URL-safe
+                var encodedQuery = encodeURIComponent(query);
+                // Redirect to the proxy server with the search query
+                window.location.href = `http://localhost:8080/search?query=${encodedQuery}`;
+            }
+        }
+    </script>
+</body>
+</html>
