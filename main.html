@@ -3,36 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Search Proxy</title>
+    <title>Galaxy</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             text-align: center;
-            margin: 50px;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #4b0082; /* Purple color for text */
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #4b0082; /* Purple color for text */
+            margin-bottom: 20px;
         }
         input[type="text"] {
-            width: 300px;
+            width: calc(100% - 130px);
             padding: 10px;
             margin-right: 10px;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            font-size: 16px;
         }
         button {
-            padding: 10px 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4b0082; /* Purple color for button */
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #3d007d; /* Darker purple on hover */
+        }
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
-    <h1>Simple Search Proxy</h1>
-    <input type="text" id="searchInput" placeholder="Enter your search query" />
-    <button onclick="search()">Search</button>
+    <div class="container">
+        <h1>Galaxy</h1>
+        <input type="text" id="searchInput" placeholder="Enter your search query" />
+        <button onclick="search()">Search</button>
+        <iframe id="resultFrame"></iframe>
+    </div>
 
     <script>
         function search() {
             var query = document.getElementById('searchInput').value;
             if (query) {
-                // Encode the query to be URL-safe
                 var encodedQuery = encodeURIComponent(query);
-                // Redirect to the proxy server with the search query
-                window.location.href = `http://localhost:8080/search?query=${encodedQuery}`;
+                var proxyURL = `http://localhost:8080/search?query=${encodedQuery}`;
+                var frame = document.getElementById('resultFrame');
+                frame.src = proxyURL;
             }
         }
     </script>
