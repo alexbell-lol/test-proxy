@@ -117,6 +117,7 @@
                     }
                 } catch (error) {
                     frame.classList.remove('loading');
+                    console.error('Error during search:', error); // Log error to console for debugging
                     alert('Failed to load the search results: ' + error.message);
                 }
             }
