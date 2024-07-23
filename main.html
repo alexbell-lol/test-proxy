@@ -3,74 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galaxy</title>
+    <title>Enhanced Search Proxy</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap">
     <style>
         body {
             font-family: 'IBM Plex Sans', sans-serif;
-            text-align: center;
             margin: 0;
-            background-color: #f4f4f4;
-            color: #4b0082; /* Purple color for text */
+            padding: 0;
+            background-color: #e0f7fa; /* Light blue background */
+            color: #4b0082; /* Purple text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
         }
         h1 {
-            color: #4b0082; /* Purple color for text */
+            color: #4b0082; /* Purple color */
             margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: 600;
         }
         input[type="text"] {
             width: calc(100% - 130px);
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #dcdcdc;
+            padding: 12px;
+            border: 2px solid #dcdcdc;
             border-radius: 5px;
             font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            border-color: #4b0082; /* Purple border on focus */
         }
         button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
             border-radius: 5px;
-            background-color: #4b0082; /* Purple color for button */
-            color: white;
+            background-color: #4b0082; /* Purple button */
+            color: #ffffff;
             cursor: pointer;
             font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         button:hover {
             background-color: #3d007d; /* Darker purple on hover */
+            transform: scale(1.05);
+        }
+        button:focus {
+            outline: none;
         }
         iframe {
             width: 100%;
-            height: 80vh;
+            height: 70vh;
             border: none;
             margin-top: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Galaxy</h1>
+        <h1>Enhanced Search Proxy</h1>
         <input type="text" id="searchInput" placeholder="Enter your search query" />
         <button onclick="search()">Search</button>
         <iframe id="resultFrame"></iframe>
     </div>
 
     <script>
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                search();
+            }
+        });
+
         function search() {
             var query = document.getElementById('searchInput').value;
             if (query) {
                 var encodedQuery = encodeURIComponent(query);
                 var proxyURL = `http://localhost:8080/search?query=${encodedQuery}`;
-                var frame = document.getElementById('resultFrame');
-                frame.src = proxyURL;
+                document.getElementById('resultFrame').src = proxyURL;
             }
         }
     </script>
